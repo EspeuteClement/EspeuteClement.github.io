@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reddit Wall</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+<div class="nav nav-active">
+    <i class="fa fa-reddit" aria-hidden="true"></i>
+<!--     <input type="text" id="subreddit" placeholder="/r/earthporn">
+        <select class="form-control" id="select">
+          <option>popular</option>
+          <option value="">rising</option>
+          <option>controversial</option>
+          <option>top</option>
+          <option>gilded</option>
+        </select> -->
+</div>
+
+<div id="data">
+
+</div>
+
+
+<!-- 
+SCRIPTS
+-->
+
+
+
+<!-- 
+SCRIPTS
+-->
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/redditwall.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $( window ).scroll(function() {
+      if ($(window).scrollTop() > 50)
+      {
+        $(".nav-active").removeClass("nav-active");
+      }
+      else
+      {
+        $(".nav").addClass("nav-active");
+      }
+
+      if($(window).scrollTop() + $(window).height() == $(document).height())
+        {
+            load_more_data();
+        }
+    });
+
+    $( ".nav input" ).focusout(function() {
+      $(".nav-active").removeClass("nav-active");
+    });
+
+    $( ".nav input" ).focus(function() {
+      $(".nav").addClass("nav-active");
+    });
+</script>
+
+
+</body>
+
+
+
+</html>
