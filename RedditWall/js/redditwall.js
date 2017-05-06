@@ -57,7 +57,7 @@ function load_more_data()
     $('#subreddit').attr('value', getUrlParameter('subreddit'));
     subreddit =  getUrlParameter('subreddit');
     var sort = getUrlParameter('sort');
-    var top = getUrlParameter('top');
+    var date = getUrlParameter('date');
 
     var limit = 40;
     var count = 0;
@@ -77,9 +77,9 @@ function load_more_data()
     url += '/.json';
     url += '?';
 
-    if (sort == "top" && top)
+    if (sort == "top" && date)
     {
-        url += "t=" + top;
+        url += "t=" + date;
         url += "&";
     }
 
@@ -110,6 +110,8 @@ function load_more_data()
                 var title = post.data.title;
                 var url = post.data.url;
                 var img_url = post.data.preview.images[0].source.url;
+                var permalink = post.data.permalink;
+                var num_comments = post.data.num_comments;
                 /*var img_url = 'img/hd1080.png';*/
                 // Limit images if too big (todo : find a workaround)
                 var max_width = 3000;
@@ -133,14 +135,20 @@ function load_more_data()
                 var link    = $('<a></a>');
                 link.attr('href', url).html(title);
 
+                var comments = $('<a></a>');
+                comments.attr('href',permalink).html("comments (" + num_comments +")");
+
                 var info = $('<div></div>');
                 info.append(link);
+                info.append('<br>');
+                info.append(comments)
 
 
                 var display = $('<div></div>');
                 display.attr('class', 'display');
                 display.append(img);
                 display.append(info);
+                
 
                 // check if it is an imgur album :
                 reg = /\/a\//
