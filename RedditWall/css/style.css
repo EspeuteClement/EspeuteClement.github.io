@@ -7,6 +7,10 @@ body {
     padding-top: 50px;
 
     font-family: 'Open Sans Condensed', sans-serif;
+
+        position: relative;
+
+  min-height: 130vh;
 }
 
 .album-icon {
@@ -15,6 +19,34 @@ body {
   right: 25px;
   font-size: 16px;
   color: white;
+}
+
+#scrollmore {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 500px;
+  font-size: 60px;
+  bottom: 0;
+  z-index: 400;
+  height: 500px;
+
+  color: white;
+
+  background: rgba(0, 0, 0, 0.5); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0),
+                                rgba(0, 0, 0, 1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(0, 0, 0, 0), 
+                              rgba(0, 0, 0, 1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0), 
+                              rgba(0, 0, 0, 1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(0, 0, 0, 0), 
+                              rgba(0, 0, 0, 1)); /* Standard syntax */
+}
+
+.space {
+  height: 400px;
 }
 
 .nav {
@@ -119,8 +151,11 @@ https://css-tricks.com/seamless-responsive-photo-grid/
 Huge thanks ! /)^3^(\
 */
 
+
+
+
 #data {
-  /* Prevent vertical gaps */
+
   line-height: 0;
    
   -webkit-column-count: 5;
@@ -132,7 +167,7 @@ Huge thanks ! /)^3^(\
 }
 
 #data img {
-  /* Just in case there are inline attributes */
+
   width: 100% !important;
   height: auto !important;
 }

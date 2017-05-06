@@ -110,7 +110,7 @@ function load_more_data()
                 var title = post.data.title;
                 var url = post.data.url;
                 var img_url = post.data.preview.images[0].source.url;
-                var permalink = post.data.permalink;
+                var permalink = "https://www.reddit.com/" + post.data.permalink;
                 var num_comments = post.data.num_comments;
                 /*var img_url = 'img/hd1080.png';*/
                 // Limit images if too big (todo : find a workaround)
