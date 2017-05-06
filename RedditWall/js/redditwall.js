@@ -34,7 +34,7 @@ function load_more_data()
 
     var url = "https://www.reddit.com/";
 
-    if (subreddit != "")
+    if (subreddit != "undefined" && subreddit)
     {
         url += "r/" + subreddit;
     }

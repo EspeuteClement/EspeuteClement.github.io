@@ -12,8 +12,13 @@
 <body>
 <div class="nav nav-active">
     <i class="fa fa-reddit" aria-hidden="true"></i>
-<!--     <input type="text" id="subreddit" placeholder="/r/earthporn">
-        <select class="form-control" id="select">
+
+    <form action="" method="GET" accept-charset="utf-8" />
+      <input type="text" class="text" id="subreddit" name="subreddit" placeholder="earthporn" />
+      <input type="submit" value="Submit" />
+    </form>
+     
+       <!-- <select class="form-control" id="select">
           <option>popular</option>
           <option value="">rising</option>
           <option>controversial</option>
@@ -42,6 +47,8 @@ SCRIPTS
 <script src="js/redditwall.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
+
+    $('form').attr('action',window.location.href);
     $( window ).scroll(function() {
       if ($(window).scrollTop() > 50)
       {
