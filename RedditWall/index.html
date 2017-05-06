@@ -13,18 +13,21 @@
 <div class="nav nav-active">
     <i class="fa fa-reddit" aria-hidden="true"></i>
 
-    <form action="" method="GET" accept-charset="utf-8" />
-      <input type="text" class="text" id="subreddit" name="subreddit" placeholder="earthporn" />
+    <form action="" method="GET" accept-charset="utf-8" id="form"/>
+      <input type="text" class="text" id="subreddit" name="subreddit" placeholder="name of the subreddit" />
+      <select class="form-control" id="sort" name="sort">
+          <option value="popular">popular</option>
+          <option value="rising">rising</option>
+          <option value="controversial">controversial</option>
+          <option value="top">top</option>
+          <option value="gilded">gilded</option>
+        </select>
+
+
       <input type="submit" value="Submit" />
     </form>
      
-       <!-- <select class="form-control" id="select">
-          <option>popular</option>
-          <option value="">rising</option>
-          <option>controversial</option>
-          <option>top</option>
-          <option>gilded</option>
-        </select> -->
+
 </div>
 
 <div id="data">
@@ -72,6 +75,8 @@ SCRIPTS
     $( ".nav input" ).focus(function() {
       $(".nav").addClass("nav-active");
     });
+
+
 </script>
 
 

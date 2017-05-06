@@ -9,7 +9,7 @@ body {
 
 .nav {
     background-color: #1d1f21;
-    position: fixed;
+    position: absolute;
     z-index: 200;
     top: 0px;
     height: 50px;
@@ -20,44 +20,43 @@ body {
     padding-left: 25px;
     opacity: 0.1;
     transition: opacity 0.5s;
-    -webkit-transition: opacity 0.5s; /* Safari */}
+    -webkit-transition: opacity 0.5s; /* Safari */
+}
 
 .nav:hover, .nav:active, .nav-active {
     opacity: 1;
 }
 
-select {
+select, input{
+    position: relative;
+
+    top: 0;
+    bottom: 0;
     display: inline-block;
     height: 40px;
-    line-height: 50px;
     margin: 0;
     padding: 0;
     font-size: 20px;
     background-color: #232426;
     border: none;
     color: #686f73;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
 }
 
 input.text {
     /*height: 100%;*/
-
+        line-height: 50px !important;
     padding-left: 5px;
-    width: 500px;
-    /*max-width: 20%;*/
+    min-width: 100px;
+    max-width: 20%;
 }
 
 form {
   display: inline-block;
-}
-
-input {
-  display: inline-block;
-      height: 40px;
-    border: 0px;
-    padding: 0px;
-    font-size: 20px;
-    background-color: #232426;
-    color: #686f73;
+  width: 80%;
 }
 
 
