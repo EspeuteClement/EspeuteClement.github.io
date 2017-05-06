@@ -124,10 +124,6 @@ function load_more_data()
                     continue;
                 }
 
-                if (ext.url)
-
-                console.log(img_url);
-
 
                 var img = $('<img></img>');
                 img.attr("src", img_url);
@@ -145,6 +141,14 @@ function load_more_data()
                 display.attr('class', 'display');
                 display.append(img);
                 display.append(info);
+
+                // check if it is an imgur album :
+                reg = /\/a\//
+
+                if (reg.exec(url))
+                {
+                    display.append('<i class="fa fa-picture-o album-icon" aria-hidden="true"></i>');
+                }
 
                 $('#data').append(display);
 
