@@ -20,11 +20,7 @@ function ext(url) {
     return (url = url.substr(1 + url.lastIndexOf("/")).split('?')[0]).split('#')[0].substr(url.lastIndexOf("."))
 }
 
-$(function() {
-    handle_top();
-    load_more_data();
 
-});
 
 $("#sort").change(function()
 {
@@ -52,9 +48,11 @@ function handle_top()
       }
 }
 
+
+
 function load_more_data()
 {
-    $('#subreddit').attr('value', getUrlParameter('subreddit'));
+
     subreddit =  getUrlParameter('subreddit');
     var sort = getUrlParameter('sort');
     var date = getUrlParameter('date');
@@ -89,14 +87,25 @@ function load_more_data()
     if (after != null)
     {
         url += 'after=' + after;
+        url += "&";
     }
 
+    url += "raw_json=1";
+
+    
+    $('#load_more').html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
 
     /*$.get("https://www.reddit.com/r/ImaginaryLandscapes/", 
         function(page) {
             var imgs = $(page).get("*.jpg");
             console.log(imgs);
         });*/
+
+    var quality = getUrlParameter('quality');
+    if (! quality)
+    {
+        quality = "sd";
+    }
 
     $.ajax({
         url: url,
@@ -109,20 +118,55 @@ function load_more_data()
             {
                 var title = post.data.title;
                 var url = post.data.url;
-                var img_url = post.data.preview.images[0].source.url;
+
+
+                var img_url = null;
+
+                var max_width = 10000;
+                var min_width = 500;
+                
+                if (quality == "sd")
+                {
+                    img_url = post.data.thumbnail;
+                }
+                else if (quality == 'hd')
+                {
+                    for (preview of post.data.preview.images[0].resolutions)
+                    {
+                        console.log(preview);
+                        if (preview.width > min_width && preview.width < max_width)
+                        {
+                            max_width = preview.width;
+                            img_url = preview.url;
+                        }
+                    }
+                }
+                else
+                {
+                    img_url = post.data.preview.images[0].source.url;
+                }
+
+                
+
                 var permalink = "https://www.reddit.com/" + post.data.permalink;
                 var num_comments = post.data.num_comments;
-                /*var img_url = 'img/hd1080.png';*/
-                // Limit images if too big (todo : find a workaround)
-                var max_width = 3000;
-                if (post.data.preview.images[0].source.width > max_width)
+
+                if (getUrlParameter('debug'))
                 {
-                    continue;
+                    img_url = 'img/500x500.png';
                 }
+                // Limit images if too big (todo : find a workaround)
+                
+                /*if (post.data.preview.images[0].source.width > max_width)
+                {
+                    console.log("Image too large, ignoring");
+                    continue;
+                }*/
 
                 // Ignore images from self posts
                 if (post.data.domain == "reddit.com")
                 {
+                    console.log("Self post, ignoring ...");
                     continue;
                 }
 
@@ -163,9 +207,31 @@ function load_more_data()
                 count ++;
                 if (count >= limit)
                 {
+                    console.log("Count reached, stopping");
                     break;
                 }
             }
+
+            $('#load_more').html('Click Here to load more');
         }
     })
 }
+
+
+
+// MAIN FUNCTION
+
+$(function() {
+
+    $("#load_more").click(load_more_data);
+    $('#subreddit').attr('value', getUrlParameter('subreddit'));
+    $('#sort').val(getUrlParameter('sort'));
+
+    handle_top();
+
+
+    $('#date').val(getUrlParameter('date'));
+    $('#quality').val(getUrlParameter('quality'));
+
+    load_more_data();
+});

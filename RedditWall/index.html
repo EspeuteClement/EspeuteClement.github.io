@@ -23,29 +23,30 @@
           <option value="gilded">gilded</option>
         </select>
 
+      quality:
+      <select class="form-control" id="quality" name="quality">
+          <option value="sd">thumbnail</option>
+          <option value="hd">high</option>
+          <option value="raw">raw</option>
+      </select>
 
-      <input type="submit" value="Submit" />
+
+      <input type="submit" value="Display" />
     </form>
      
 
 </div>
 
-<div id="data">
+<section id="data">
 
-</div>
+</section>
 
 <div id="scrollmore">
-  Scroll to the bottom to load more ...
+  <a href="javascript:void(0)" id="load_more">Click Here to load more</a>
 </div>
 
 <div class="space">
 </div>
-
-<!-- 
-SCRIPTS
--->
-
-
 
 <!-- 
 SCRIPTS
@@ -68,10 +69,10 @@ SCRIPTS
         $(".nav").addClass("nav-active");
       }
 
-      if($(window).scrollTop() + $(window).height() == $(document).height())
+      /*if($(window).scrollTop() + $(window).height() == $(document).height())
         {
             load_more_data();
-        }
+        }*/
     });
 
     $( ".nav input" ).focusout(function() {

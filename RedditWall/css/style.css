@@ -4,6 +4,7 @@
 
 body {
     background-color: #1d1f21;
+    padding: 0;
     padding-top: 50px;
 
     font-family: 'Open Sans Condensed', sans-serif;
@@ -45,8 +46,23 @@ body {
                               rgba(0, 0, 0, 1)); /* Standard syntax */
 }
 
+#load_more {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
 .space {
   height: 400px;
+}
+
+.display {
+
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .nav {
@@ -54,8 +70,9 @@ body {
     position: absolute;
     z-index: 200;
     top: 0px;
-    height: 50px;
-    width: 100%;
+    min-height: 50px;
+    left: 0;
+    right: 0;
     color: #686f73;
     line-height: 50px;
     font-size: 30px;
@@ -100,6 +117,8 @@ form {
   display: inline-block;
   width: 80%;
 }
+
+
 
 
 #data .display div {
@@ -167,7 +186,12 @@ Huge thanks ! /)^3^(\
 }
 
 #data img {
+  width: 100% !important;
+  height: auto !important;
+}
 
+#data .display {
+  display: inline-block;
   width: 100% !important;
   height: auto !important;
 }
