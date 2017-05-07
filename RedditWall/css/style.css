@@ -1,3 +1,7 @@
+/*
+  General Pagination
+*/
+
 * {
     margin:  0px;
     font-family: 'Open Sans Condensed', sans-serif;
@@ -15,14 +19,12 @@ body {
   min-height: 100vh;
 }
 
-.album-icon {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  font-size: 16px;
-  color: white;
-}
 
+/*
+  ---------------------------------------------------
+  Footer
+  ---------------------------------------------------
+*/
 #scrollmore {
   position: absolute;
   left: 0;
@@ -61,10 +63,16 @@ body {
 
 }
 
-a {
+#load_more a {
   color: white;
   text-decoration: none;
 }
+
+/*
+  ---------------------------------------------------
+  Header/Navbar
+  ---------------------------------------------------
+*/
 
 .nav {
     background-color: #1d1f21;
@@ -131,7 +139,19 @@ form {
   width: 80%;
 }
 
+/*
+  ---------------------------------------------------
+  Image display
+  ---------------------------------------------------
+*/
 
+
+ .display {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    line-height: 0px;
+}
 
 
  .display div {
@@ -174,12 +194,19 @@ form {
   transform: scale(1.1);
 }
 
- .display {
-    overflow: hidden;
-    position: relative;
-    display: block;
-    line-height: 0px;
+.album-icon {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 16px;
+  color: white;
 }
+
+/*
+  ---------------------------------------------------
+  Image columns
+  ---------------------------------------------------
+*/
 
 table {
   width: 100%;
@@ -206,69 +233,3 @@ td {
   position: relative;
 }
 
-
-
-.table_cell {
-
-}
-
-
-/* Seamless wall of images from
-https://css-tricks.com/seamless-responsive-photo-grid/
-Huge thanks ! /)^3^(\
-*/
-
-
-
-
-#data {
-
-  line-height: 0;
-   
-  -webkit-column-count: 5;
-  -webkit-column-gap:   0px;
-  -moz-column-count:    5;
-  -moz-column-gap:      0px;
-  column-count:         5;
-  column-gap:           0px;  
-}
-
-img {
-  width: 100% !important;
-  height: auto !important;
-}
-
-#data .display {
-  display: inline-block;
-  width: 100% !important;
-  height: auto !important;
-}
-
-@media (max-width: 1200px) {
-  #data {
-  -moz-column-count:    4;
-  -webkit-column-count: 4;
-  column-count:         4;
-  }
-}
-@media (max-width: 1000px) {
-  #data {
-  -moz-column-count:    3;
-  -webkit-column-count: 3;
-  column-count:         3;
-  }
-}
-@media (max-width: 800px) {
-  #data {
-  -moz-column-count:    2;
-  -webkit-column-count: 2;
-  column-count:         2;
-  }
-}
-@media (max-width: 400px) {
-  #data {
-  -moz-column-count:    1;
-  -webkit-column-count: 1;
-  column-count:         1;
-  }
-}
