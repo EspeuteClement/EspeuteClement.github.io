@@ -303,14 +303,17 @@ $(function() {
 
     $("#load_more").click(load_more_data);
     $('#subreddit').attr('value', getUrlParameter('subreddit'));
-    $('#sort').val(getUrlParameter('sort'));
-    $('#nsfw').val(getUrlParameter('nsfw'));
+    if (getUrlParameter('sort'))
+        $('#sort').val(getUrlParameter('sort'));
+    if (getUrlParameter('nsfw'))
+        $('#nsfw').val(getUrlParameter('nsfw'));
 
     handle_top();
 
-
-    $('#date').val(getUrlParameter('date'));
-    $('#quality').val(getUrlParameter('quality'));
+    if (getUrlParameter('date'))
+        $('#date').val(getUrlParameter('date'));
+    if (getUrlParameter('quality'))
+        $('#quality').val(getUrlParameter('quality'));
 
     load_more_data();
 });
