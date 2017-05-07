@@ -1,5 +1,7 @@
 
 var after = null;
+var confirm_age = false;
+
 
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -52,6 +54,25 @@ function handle_top()
 
 function load_more_data()
 {
+
+    var nsfw_filter = getUrlParameter('nsfw');
+    if (! nsfw_filter)
+    {
+        nsfw_filter = 'hide';
+    }
+
+    if (! confirm_age && nsfw_filter != 'hide')
+    {
+        if (confirm("Warning, you disabled the NSFW filter. Do you confirm that you are 18 and willing to see adult content ?"))
+        {
+            confirm_age = true;
+        }
+        else
+        {
+            return;
+        }
+    }
+
 
     subreddit =  getUrlParameter('subreddit');
     var sort = getUrlParameter('sort');
@@ -118,13 +139,26 @@ function load_more_data()
             {
                 var title = post.data.title;
                 var url = post.data.url;
+                var age = post.data.over_18;
+
+                // Skip images that are nsfw if nsfw is disabled
+                if (nsfw_filter == 'hide' && age == true)
+                {
+                    continue;
+                }
+
+                // Skip non nsfw image if nsfw is only
+                if (nsfw_filter == 'only' && age == false)
+                {
+                    continue;
+                }
 
 
                 var img_url = null;
 
                 var max_width = 10000;
                 var min_width = 500;
-                
+
                 if (quality == "sd")
                 {
                     img_url = post.data.thumbnail;
@@ -213,6 +247,10 @@ function load_more_data()
             }
 
             $('#load_more').html('Click Here to load more');
+        },
+        error: function()
+        {
+            $('#load_more').html('Couldn\'t reach reddit servers. Click here to try again');
         }
     })
 }
@@ -226,6 +264,7 @@ $(function() {
     $("#load_more").click(load_more_data);
     $('#subreddit').attr('value', getUrlParameter('subreddit'));
     $('#sort').val(getUrlParameter('sort'));
+    $('#nsfw').val(getUrlParameter('nsfw'));
 
     handle_top();
 

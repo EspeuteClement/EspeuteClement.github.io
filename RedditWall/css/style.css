@@ -1,5 +1,6 @@
 * {
     margin:  0px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
 
         position: relative;
 
-  min-height: 130vh;
+  min-height: 100vh;
 }
 
 .album-icon {
@@ -80,6 +81,18 @@ a {
     opacity: 0.1;
     transition: opacity 0.5s;
     -webkit-transition: opacity 0.5s; /* Safari */
+    font-size: 25px;
+}
+
+.nav p {
+  display: inline-block;
+}
+
+.search {
+  font-size: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #414249;
 }
 
 .nav:hover, .nav:active, .nav-active {
