@@ -239,7 +239,7 @@ function load_more_data()
                 var display = $('<div></div>');
                 display.attr('class', 'display');
                 display.append(img);
-                //display.append(info);
+                display.append(info);
                 
 
                 // check if it is an imgur album :
