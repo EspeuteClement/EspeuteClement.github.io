@@ -58,6 +58,7 @@ function handle_top()
 
 function load_more_data()
 {
+    // Perform age check if nsfw filter is turned off
 
     var nsfw_filter = getUrlParameter('nsfw');
     if (! nsfw_filter)
@@ -67,7 +68,7 @@ function load_more_data()
 
     if (! confirm_age && nsfw_filter != 'hide')
     {
-        if (confirm("Warning, you disabled the NSFW filter. Do you confirm that you are 18 and willing to see adult content ?"))
+        if (confirm("Warning, you disabled the NSFW filter. Do you confirm that you are over 18 and willing to see adult content ?"))
         {
             confirm_age = true;
         }
@@ -85,6 +86,7 @@ function load_more_data()
     var limit = 40;
     var count = 0;
 
+    // Build json request url
     var url = "https://www.reddit.com/";
 
     if (subreddit != "undefined" && subreddit)
@@ -117,20 +119,8 @@ function load_more_data()
 
     url += "raw_json=1";
 
-    
+    // Change load more message by a loading spinner    
     $('#load_more').html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
-
-    /*$.get("https://www.reddit.com/r/ImaginaryLandscapes/", 
-        function(page) {
-            var imgs = $(page).get("*.jpg");
-            console.log(imgs);
-        });*/
-
-    var quality = getUrlParameter('quality');
-    if (! quality)
-    {
-        quality = "hd";
-    }
 
     $.ajax({
         url: url,
@@ -138,6 +128,12 @@ function load_more_data()
             var data = results.data.children;
 
             after = results.data.after;
+
+            var quality = getUrlParameter('quality');
+            if (! quality)
+            {
+                quality = "hd";
+            }
 
             for (post of data)
             {
@@ -151,32 +147,27 @@ function load_more_data()
                     continue;
                 }
 
-                // Skip non nsfw image if nsfw is only
-                if (nsfw_filter == 'only' && age == false)
-                {
-                    continue;
-                }
-
                 // Skip if no preview
                 if (! post.data.preview){
                     continue;
                 }
 
+
+                // Get image for display
                 var img_url = null;
 
-                var max_width = 10000;
-                var min_width = 500;
-
+                // TODO fix image size for thumbnail
                 var img_width = post.data.preview.images[0].source.width;
                 var img_heigth = post.data.preview.images[0].source.height;
 
                 if (quality == "sd")
                 {
                     img_url = post.data.thumbnail;
-
                 }
                 else if (quality == 'hd')
                 {
+                    var max_width = 10000;
+                    var min_width = 500;
                     for (preview of post.data.preview.images[0].resolutions)
                     {
                         if (preview.width > min_width && preview.width < max_width)
@@ -191,15 +182,9 @@ function load_more_data()
                     img_url = post.data.preview.images[0].source.url;
                 }
 
-                
-
+                // Get comment link
                 var permalink = "https://www.reddit.com/" + post.data.permalink;
                 var num_comments = post.data.num_comments;
-
-                if (getUrlParameter('debug'))
-                {
-                    img_url = 'img/500x500.png';
-                }
 
                 // Ignore images from self posts
                 if (post.data.domain == "reddit.com")
@@ -208,6 +193,7 @@ function load_more_data()
                     continue;
                 }
 
+                // Ignore no url
                 if (!img_url)
                 {
                     continue;
@@ -222,30 +208,33 @@ function load_more_data()
                     continue;
                 }
 
+                // Create the image container
                 var img = $('<img></img>');
                 img.attr("src", img_url);
+                img.attr("alt", title);
 
-
-
+                // Create link to image post
                 var link    = $('<a></a>');
                 link.attr('href', url).html(title);
 
+                // Create comment link
                 var comments = $('<a></a>');
                 comments.attr('href',permalink).html("comments (" + num_comments +")");
 
+                // Create the on hover info with links
                 var info = $('<div></div>');
                 info.append(link);
                 info.append('<br>');
                 info.append(comments)
 
-
+                // Create the whole image display
                 var display = $('<div></div>');
                 display.attr('class', 'display');
                 display.append(img);
                 display.append(info);
                 
 
-                // check if it is an imgur album :
+                // check if it is an imgur album, and add icon if its the case :
                 reg = /\/a\//
 
                 if (reg.exec(url))
@@ -253,6 +242,8 @@ function load_more_data()
                     display.append('<i class="fa fa-picture-o album-icon" aria-hidden="true"></i>');
                 }
 
+                // Find the smallest column to put
+                // our image in
                 var min_height = 100000000;
                 var min_index = 0;
                 for (var i = 0; i < col_number; i++)
@@ -264,9 +255,11 @@ function load_more_data()
                     }
                 }
 
+                // Put the image in the chosen column
                 var col = $('#col' + (min_index));
                 var w = window.innerWidth/col_number;
 
+                // Update the column height
                 var h = w * img_heigth / img_width;
                 col_heigth[min_index] += h;
                 col.append(display);

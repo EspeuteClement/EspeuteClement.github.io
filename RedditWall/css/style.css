@@ -53,6 +53,8 @@ body {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  color: white;
+  text-decoration: none;
 }
 
 .space {
@@ -61,11 +63,6 @@ body {
 
 .display {
 
-}
-
-#load_more a {
-  color: white;
-  text-decoration: none;
 }
 
 /*
@@ -153,6 +150,10 @@ form {
     line-height: 0px;
 }
 
+img {
+  width: 100% !important;
+  height: auto !important;
+}
 
  .display div {
 
@@ -176,7 +177,8 @@ form {
 
  .display a {
     color: white;
-    line-height: 1em;
+    font-size: 1.5em;
+    line-height: 1.4em;
     overflow-wrap: break-word;
 }
 
