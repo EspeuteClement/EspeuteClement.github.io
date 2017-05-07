@@ -24,7 +24,9 @@ function ext(url) {
     return (url = url.substr(1 + url.lastIndexOf("/")).split('?')[0]).split('#')[0].substr(url.lastIndexOf("."))
 }
 
-
+var fileExtension = function( url ) {
+    return url.split('.').pop().split(/\#|\?/)[0];
+}
 
 $("#sort").change(function()
 {
@@ -127,7 +129,7 @@ function load_more_data()
     var quality = getUrlParameter('quality');
     if (! quality)
     {
-        quality = "sd";
+        quality = "hd";
     }
 
     $.ajax({
@@ -198,13 +200,6 @@ function load_more_data()
                 {
                     img_url = 'img/500x500.png';
                 }
-                // Limit images if too big (todo : find a workaround)
-                
-                /*if (post.data.preview.images[0].source.width > max_width)
-                {
-                    console.log("Image too large, ignoring");
-                    continue;
-                }*/
 
                 // Ignore images from self posts
                 if (post.data.domain == "reddit.com")
@@ -218,6 +213,14 @@ function load_more_data()
                     continue;
                 }
 
+                // Filter extensions
+                var e = ext(img_url);
+                console.log("ext:" + e + ", url :" + img_url);
+
+                if (! (e == ".jpg" || e == ".jpeg" || e == ".png"))
+                {
+                    continue;
+                }
 
                 var img = $('<img></img>');
                 img.attr("src", img_url);
@@ -277,6 +280,15 @@ function load_more_data()
             }
 
             $('#load_more').html('Click Here to load more');
+
+            if (data.length < 1)
+            {
+                $('#load_more').html('Couldn\' load data, try changing your search parameters');
+            }
+            else if (count < 1)
+            {
+                $('#load_more').html('Couldn\' load images, try changing the nsfw filter or find a sub with image posts');
+            }
         },
         error: function()
         {
