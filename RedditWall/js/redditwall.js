@@ -2,6 +2,7 @@
 var after = null;
 var confirm_age = false;
 var col_number = 0;
+var col_heigth = [];
 
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -164,15 +165,18 @@ function load_more_data()
                 var max_width = 10000;
                 var min_width = 500;
 
+                var img_width = post.data.preview.images[0].source.width;
+                var img_heigth = post.data.preview.images[0].source.height;
+
                 if (quality == "sd")
                 {
                     img_url = post.data.thumbnail;
+
                 }
                 else if (quality == 'hd')
                 {
                     for (preview of post.data.preview.images[0].resolutions)
                     {
-                        console.log(preview);
                         if (preview.width > min_width && preview.width < max_width)
                         {
                             max_width = preview.width;
@@ -209,6 +213,11 @@ function load_more_data()
                     continue;
                 }
 
+                if (!img_url)
+                {
+                    continue;
+                }
+
 
                 var img = $('<img></img>');
                 img.attr("src", img_url);
@@ -230,7 +239,7 @@ function load_more_data()
                 var display = $('<div></div>');
                 display.attr('class', 'display');
                 display.append(img);
-                display.append(info);
+                //display.append(info);
                 
 
                 // check if it is an imgur album :
@@ -241,7 +250,23 @@ function load_more_data()
                     display.append('<i class="fa fa-picture-o album-icon" aria-hidden="true"></i>');
                 }
 
-                $('#col' + (count % col_number)).append(display);
+                var min_height = 100000000;
+                var min_index = 0;
+                for (var i = 0; i < col_number; i++)
+                {
+                    if (col_heigth[i] < min_height)
+                    {
+                        min_height = col_heigth[i];
+                        min_index = i;
+                    }
+                }
+
+                var col = $('#col' + (min_index));
+                var w = window.innerWidth/col_number;
+
+                var h = w * img_heigth / img_width;
+                col_heigth[min_index] += h;
+                col.append(display);
 
                 count ++;
                 if (count >= limit)
@@ -273,6 +298,7 @@ $(function() {
     for (var i = 0; i < col_number; i++ )
     {
         $('#row').append('<td id="col' + i + '"></td>');
+        col_heigth.push(0);
     }
 
     $("#load_more").click(load_more_data);
