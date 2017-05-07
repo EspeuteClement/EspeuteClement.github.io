@@ -1,6 +1,7 @@
 
 var after = null;
 var confirm_age = false;
+var col_number = 0;
 
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -153,6 +154,10 @@ function load_more_data()
                     continue;
                 }
 
+                // Skip if no preview
+                if (! post.data.preview){
+                    continue;
+                }
 
                 var img_url = null;
 
@@ -236,7 +241,7 @@ function load_more_data()
                     display.append('<i class="fa fa-picture-o album-icon" aria-hidden="true"></i>');
                 }
 
-                $('#data').append(display);
+                $('#col' + (count % col_number)).append(display);
 
                 count ++;
                 if (count >= limit)
@@ -260,6 +265,15 @@ function load_more_data()
 // MAIN FUNCTION
 
 $(function() {
+    // Create td based on width
+    var w = window.innerWidth;
+    w - 200;
+    col_number = Math.floor(w / 400) + 1;
+
+    for (var i = 0; i < col_number; i++ )
+    {
+        $('#row').append('<td id="col' + i + '"></td>');
+    }
 
     $("#load_more").click(load_more_data);
     $('#subreddit').attr('value', getUrlParameter('subreddit'));
