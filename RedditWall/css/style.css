@@ -80,7 +80,6 @@ body {
     color: #686f73;
     line-height: 50px;
     font-size: 30px;
-    padding-left: 25px;
     opacity: 0.1;
     transition: opacity 0.5s;
     -webkit-transition: opacity 0.5s; /* Safari */
@@ -93,7 +92,6 @@ body {
   text-align: left;
   overflow: hidden;
   padding-left: 10px;
-  padding-right: 10px;
   max-width: 600px;
 }
 
@@ -103,7 +101,7 @@ body {
 
 .form_visible {
   float: left;
-  display: inline-block;  
+  display: inline-block;
 }
 
 .hamburger {
@@ -123,7 +121,6 @@ body {
     height: 40px;
 }
 .nav .hidden p {
-  width: 150px;
 }
 
 .search {
@@ -167,8 +164,10 @@ select {
 
 input.text {
     /*height: 100%;*/
-        line-height: 50px !important;
+    line-height: 50px !important;
     padding-left: 5px;
+    max-width: 200px;
+    min-width: 100px;
 }
 
 form {
@@ -210,7 +209,6 @@ img {
 }
 
  .display div {
-
     opacity: 0;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.9);

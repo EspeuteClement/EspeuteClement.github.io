@@ -216,10 +216,12 @@ function load_more_data()
                 // Create link to image post
                 var link    = $('<a></a>');
                 link.attr('href', url).html(title);
+                link.attr('target', '_blank');
 
                 // Create comment link
                 var comments = $('<a></a>');
                 comments.attr('href',permalink).html("comments (" + num_comments +")");
+                comments.attr('target', '_blank');
 
                 // Create the on hover info with links
                 var info = $('<div></div>');
