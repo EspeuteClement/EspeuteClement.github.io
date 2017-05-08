@@ -10,42 +10,50 @@
 
 </head>
 <body>
+<form action="" method="GET" accept-charset="utf-8" id="form"/>
 <div class="nav nav-active">
-    <i class="fa fa-reddit" aria-hidden="true"></i>
-
-
-    <form action="" method="GET" accept-charset="utf-8" id="form"/>
+    <div class="form_group form_visible">
       <p>subreddit:</p>
       <input type="text" class="text" id="subreddit" name="subreddit" placeholder="name of the subreddit" />
+    </div>
+
+          <input type="submit" value="SEARCH" class="search"/>
+    <a class="hamburger" href="javascript:void(0);"> ||| </a>
+
       
-      <p>sort</p>
+
+    
+    <div class="hidden"">
+    <div class="form_group full_width">
+      <p>sort:</p>
       <select class="form-control" id="sort" name="sort">
           <option value="popular">popular</option>
           <option value="rising">rising</option>
           <option value="controversial">controversial</option>
           <option value="top">top</option>
           <option value="gilded">gilded</option>
-        </select>
+        </select>      
+    </div>
 
+    <div class="form_group full_width">
       <p>quality:</p>
       <select class="form-control" id="quality" name="quality">
           <option value="hd">high</option>
           <option value="sd">thumbnail</option>
           <option value="raw">raw</option>
       </select>
+    </div>
 
+    <div class=form_group full_width>
       <p>nsfw:</p>
       <select class="form-control" id="nsfw" name="nsfw">
           <option value="hide">hide</option>
           <option value="show">show</option>
-      </select>
-
-      
-      <input type="submit" value="SEARCH" class="search"/>
-    </form>
-     
-
+      </select>      
+    </div>
+    </div>
 </div>
+</form>
 
 <section id="data">
 
@@ -57,26 +65,6 @@
 
     </tr>
 </table>
-
-<!-- <div class="display">
-  <img src="https://i.redditmedia.com/hopHSdgeHyWoC3tgYwOlutjKh6onJ4YdyVatmyLzYxE.jpg?fit=crop&amp;crop=faces%2Centropy&amp;arh=2&amp;w=640&amp;s=a2f27b1fe047db460fe1a7c36c00cb65"><div><a href="https://cdnb.artstation.com/p/assets/images/images/000/675/595/large/alex-serebryakov-env10.jpg?1443931355">Watermill by Alex Serebryakov</a><br><a href="https://www.reddit.com//r/ImaginaryLandscapes/comments/5xmm3h/watermill_by_alex_serebryakov/">comments (63)</a>
-  </div>
-</div>
-
-<div class="display">
-  <img src="https://i.redditmedia.com/oz36MVtnsbN1CPVtlGXkBq1vJ3s-qHNIRywGn4_ROKs.jpg?fit=crop&amp;crop=faces%2Centropy&amp;arh=2&amp;w=640&amp;s=e197e5b5ae758af1ead5e12bdb0455c7"><div><a href="https://cdnb.artstation.com/p/assets/images/images/001/128/001/large/clement-dartigues-scirie.jpg?1443929144">Sawmill by Clement Dartigues</a><br><a href="https://www.reddit.com//r/ImaginaryLandscapes/comments/68lawu/sawmill_by_clement_dartigues/">comments (54)</a>
-  </div>
-</div>
-
-<div class="display">
-  <img src="https://i.redditmedia.com/UClzIqGRZcVrtQXzGw_FAJ4AuFSy-KLHCWzY2tWryvU.jpg?fit=crop&amp;crop=faces%2Centropy&amp;arh=2&amp;w=640&amp;s=344978272bbe877894a96e116d3af892"><div><a href="http://i.imgur.com/SA6pcdU.jpg">A Change of Scenery by Rob Gonsalves</a><br><a href="https://www.reddit.com//r/ImaginaryLandscapes/comments/5ia4dm/a_change_of_scenery_by_rob_gonsalves/">comments (37)</a>
-  </div>
-</div>
-
-<div class="display">
-  <img src="https://i.redditmedia.com/8sXPfoFCCRSyy2Ib7vCynDO9dGVTF4NHY4moOD6z-8w.jpg?fit=crop&amp;crop=faces%2Centropy&amp;arh=2&amp;w=640&amp;s=774cefae2de79592f708c476adc53715"><div><a href="https://cdna.artstation.com/p/assets/images/images/004/434/774/large/etienne-hebinger-canyon-bridge-8-sd.jpg?1483727878">Collapsed Bridge by Etienne Hebinger</a><br><a href="https://www.reddit.com//r/ImaginaryLandscapes/comments/5mr0p2/collapsed_bridge_by_etienne_hebinger/">comments (65)</a>
-  </div>
-</div> -->
 
 <div id="scrollmore">
   <a href="javascript:void(0)" id="load_more">Click Here to load more</a>
@@ -118,6 +106,11 @@ SCRIPTS
 
     $( ".nav input" ).focus(function() {
       $(".nav").addClass("nav-active");
+    });
+
+    $(".hamburger").click(function() {
+      console.log("click");
+      $(".hidden").toggleClass("visible");
     });
 
 

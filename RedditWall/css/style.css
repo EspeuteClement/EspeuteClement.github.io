@@ -10,7 +10,6 @@
 body {
     background-color: #1d1f21;
     padding: 0;
-    padding-top: 50px;
 
     font-family: 'Open Sans Condensed', sans-serif;
 
@@ -73,7 +72,6 @@ body {
 
 .nav {
     background-color: #1d1f21;
-    position: absolute;
     z-index: 200;
     top: 0px;
     min-height: 50px;
@@ -89,8 +87,43 @@ body {
     font-size: 25px;
 }
 
+.form_group {
+  float:  none;
+  display: block; 
+  text-align: left;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 600px;
+}
+
+.full_width {
+  width: 100%; 
+}
+
+.form_visible {
+  float: left;
+  display: inline-block;  
+}
+
+.hamburger {
+  float: right;
+  height: 100%;
+  width: 50px;
+  color: white;
+  background-color: #414249;
+  text-align: center;
+  text-decoration: none;
+  line-height: 50px;
+  opacity: 0.5;
+}
+
 .nav p {
-  display: inline-block;
+    display: inline-block;
+    height: 40px;
+}
+.nav .hidden p {
+  width: 150px;
 }
 
 .search {
@@ -106,9 +139,9 @@ body {
 
 select, input{
     position: relative;
-
     top: 0;
     bottom: 0;
+    right: 0;
     display: inline-block;
     height: 40px;
     margin: 0;
@@ -123,18 +156,39 @@ select, input{
     text-overflow: '';
 }
 
+
+
+
+select {
+  width: 50%;
+  float: right;
+  margin-bottom: 10px;
+}
+
 input.text {
     /*height: 100%;*/
         line-height: 50px !important;
     padding-left: 5px;
-    min-width: 100px;
-    max-width: 20%;
 }
 
 form {
+  
   display: inline-block;
-  width: 80%;
+  width: 100%;
 }
+
+.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.visible {
+  display: block;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+
 
 /*
   ---------------------------------------------------
@@ -164,15 +218,89 @@ img {
     right: 0;
     bottom: 0;
     z-index: 100;
-    transition: opacity 0.5s;
-    -webkit-transition: opacity 0.5s; /* Safari */
+    display: none;
 
     margin: 0px;
     padding: 20px;
 }
 
- .display:hover div, .display:active div {
-     opacity: 1;
+ .display:hover div, .display:active div
+{
+    opacity: 1;
+    display: block;
+
+    -webkit-animation: fadeInFromNone 0.5s ease-out;
+    -moz-animation: fadeInFromNone 0.5s ease-out;
+    -o-animation: fadeInFromNone 0.5s ease-out;
+    animation: fadeInFromNone 0.5s ease-out;
+}
+
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
 }
 
  .display a {
